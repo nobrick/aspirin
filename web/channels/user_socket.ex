@@ -2,7 +2,7 @@ defmodule Aspirin.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "rooms:*", Aspirin.RoomChannel
+  channel "status:*", Aspirin.StatusChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
