@@ -52,12 +52,23 @@ exports.config = {
     babel: {
       // Do not use ES6 compiler in vendor code
       ignore: [/web\/static\/vendor/]
+    },
+    sass: {
+      options: {
+        // Tell sass-brunch where to look for files to @import
+        includePaths: ["node_modules/bootstrap-sass/assets/stylesheets"]
+      },
+      // Minimum precision required by bootstrap-sass
+      precision: 8
     }
   },
 
   modules: {
     autoRequire: {
-      "js/app.js": ["web/static/js/app"]
+      "js/app.js": [
+        "bootstrap-sass",
+        "web/static/js/app"
+      ]
     }
   },
 
@@ -65,6 +76,10 @@ exports.config = {
     enabled: true,
     // Whitelist the npm deps to be pulled in as front-end assets.
     // All other deps in package.json will be excluded from the bundle.
-    whitelist: ["phoenix", "phoenix_html"]
+    whitelist: ["phoenix", "phoenix_html", "jquery", "bootstrap-sass"],
+    globals: {
+      $: 'jquery',
+      jQuery: 'jquery'
+    }
   }
 };
