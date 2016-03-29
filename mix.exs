@@ -4,6 +4,10 @@ defmodule Aspirin.Mixfile do
   def project do
     [app: :aspirin,
      version: "0.0.1",
+     build_path: "../../_build",
+     config_path: "../../config/config.exs",
+     deps_path: "../../deps",
+     lockfile: "../../mix.lock",
      elixir: "~> 1.0",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
@@ -36,7 +40,8 @@ defmodule Aspirin.Mixfile do
      {:phoenix_html, "~> 2.4"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.9"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:aspirin_monitor, in_umbrella: true}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
