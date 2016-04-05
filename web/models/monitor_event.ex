@@ -5,13 +5,14 @@ defmodule Aspirin.MonitorEvent do
     field :addr, :string
     field :port, :integer
     field :name, :string
-    field :type, :string
+    field :type, :string, default: "port"
+    field :enabled, :boolean, default: true
 
     timestamps
   end
 
-  @required_fields ~w(addr port name)
-  @optional_fields ~w(type)
+  @required_fields ~w(addr port name type)
+  @optional_fields ~w(enabled)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -22,5 +23,8 @@ defmodule Aspirin.MonitorEvent do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+    |> validate_inclusion(:type, ~w(port))
+    |> validate_number(:port, greater_than: 0, less_than: 65536)
+    |> unique_constraint(:name)
   end
 end
