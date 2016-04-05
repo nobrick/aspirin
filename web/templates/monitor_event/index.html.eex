@@ -1,0 +1,32 @@
+<h2>Listing monitor events</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Addr</th>
+      <th>Port</th>
+      <th>Name</th>
+      <th>Type</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for monitor_event <- @monitor_events do %>
+    <tr>
+      <td><%= monitor_event.addr %></td>
+      <td><%= monitor_event.port %></td>
+      <td><%= monitor_event.name %></td>
+      <td><%= monitor_event.type %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: monitor_event_path(@conn, :show, monitor_event), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: monitor_event_path(@conn, :edit, monitor_event), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: monitor_event_path(@conn, :delete, monitor_event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New monitor event", to: monitor_event_path(@conn, :new) %>
