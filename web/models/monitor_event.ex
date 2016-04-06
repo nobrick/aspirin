@@ -27,4 +27,8 @@ defmodule Aspirin.MonitorEvent do
     |> validate_number(:port, greater_than: 0, less_than: 65536)
     |> unique_constraint(:name)
   end
+
+  def enabled(query) do
+    from m in query, where: m.enabled == true
+  end
 end
