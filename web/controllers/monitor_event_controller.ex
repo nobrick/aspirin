@@ -1,6 +1,6 @@
 defmodule Aspirin.MonitorEventController do
   use Aspirin.Web, :controller
-
+  import Aspirin.MonitorManager, only: [sync_repo: 1]
   alias Aspirin.MonitorEvent
 
   plug :scrub_params, "monitor_event" when action in [:create, :update]
@@ -20,6 +20,7 @@ defmodule Aspirin.MonitorEventController do
 
     case Repo.insert(changeset) do
       {:ok, _monitor_event} ->
+        sync_repo(Aspirin.MonitorManager)
         conn
         |> put_flash(:info, "Monitor event created successfully.")
         |> redirect(to: monitor_event_path(conn, :index))
@@ -45,6 +46,7 @@ defmodule Aspirin.MonitorEventController do
 
     case Repo.update(changeset) do
       {:ok, monitor_event} ->
+        sync_repo(Aspirin.MonitorManager)
         conn
         |> put_flash(:info, "Monitor event updated successfully.")
         |> redirect(to: monitor_event_path(conn, :show, monitor_event))
@@ -59,7 +61,7 @@ defmodule Aspirin.MonitorEventController do
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
     Repo.delete!(monitor_event)
-
+    sync_repo(Aspirin.MonitorManager)
     conn
     |> put_flash(:info, "Monitor event deleted successfully.")
     |> redirect(to: monitor_event_path(conn, :index))
