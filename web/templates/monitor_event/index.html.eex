@@ -1,4 +1,4 @@
-<h2>Listing monitor events</h2>
+<h2>Monitor</h2>
 
 <table class="table">
   <thead>
@@ -7,17 +7,19 @@
       <th>Port</th>
       <th>Name</th>
       <th>Type</th>
+      <th>State</th>
 
       <th></th>
     </tr>
   </thead>
   <tbody>
 <%= for monitor_event <- @monitor_events do %>
-    <tr>
+    <tr class="<%= monitor_event_identity_class(monitor_event) %>">
       <td><%= monitor_event.addr %></td>
       <td><%= monitor_event.port %></td>
       <td><%= monitor_event.name %></td>
       <td><%= monitor_event.type %></td>
+      <td>Initial </td>
 
       <td class="text-right">
         <%= link "Show", to: monitor_event_path(@conn, :show, monitor_event), class: "btn btn-default btn-xs" %>
