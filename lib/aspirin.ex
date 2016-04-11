@@ -18,7 +18,9 @@ defmodule Aspirin do
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Aspirin.Supervisor]
-    Supervisor.start_link(children, opts)
+    ret = Supervisor.start_link(children, opts)
+    Aspirin.MonitorManager.sync_repo(Aspirin.MonitorManager)
+    ret
   end
 
   # Tell Phoenix to update the endpoint configuration
