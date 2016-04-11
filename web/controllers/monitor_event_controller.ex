@@ -6,7 +6,7 @@ defmodule Aspirin.MonitorEventController do
   plug :scrub_params, "monitor_event" when action in [:create, :update]
 
   def index(conn, _params) do
-    monitor_events = Repo.all(MonitorEvent)
+    monitor_events = MonitorEvent |> MonitorEvent.by_name |> Repo.all
     render(conn, "index.html", monitor_events: monitor_events)
   end
 
@@ -49,7 +49,7 @@ defmodule Aspirin.MonitorEventController do
         sync_repo(Aspirin.MonitorManager)
         conn
         |> put_flash(:info, "Monitor event updated successfully.")
-        |> redirect(to: monitor_event_path(conn, :show, monitor_event))
+        |> redirect(to: monitor_event_path(conn, :index))
       {:error, changeset} ->
         render(conn, "edit.html", monitor_event: monitor_event, changeset: changeset)
     end

@@ -4,6 +4,7 @@
 // To use Phoenix channels, the first step is to import Socket
 // and connect at the socket path in "lib/my_app/endpoint.ex":
 import {Socket} from "phoenix"
+import moment from "moment"
 
 let socket = new Socket("/socket", {params: {token: window.userToken}})
 
@@ -61,6 +62,30 @@ channel.join()
 
 channel.on("test_port", payload => {
   console.log(payload)
+  let row = $('tr#' + payload.identity)
+  let eventState = row.find('.event-state')
+  let eventStateUpdatedAt = row.find('.state-updated-at')
+  if(payload.body == 'success') {
+    eventState.text('SUCCESS')
+    eventState.removeClass('text-danger')
+    eventState.addClass('text-success')
+    row.removeClass('danger')
+  } else {
+    eventState.text('FAILURE: ' + payload.reason)
+    eventState.removeClass('text-success')
+    eventState.addClass('text-danger')
+    row.addClass('danger')
+  }
+  eventStateUpdatedAt.data('time', payload.timestamp)
+  eventStateUpdatedAt.text(moment(payload.timestamp).fromNow())
+})
+
+$(document).ready(() => {
+  setInterval(() => {
+    $('.state-updated-at').each((_index, elem) => {
+      $(elem).text(moment($(elem).data('time')).fromNow())
+    })
+  }, 1000)
 })
 
 export default socket

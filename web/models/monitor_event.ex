@@ -28,6 +28,10 @@ defmodule Aspirin.MonitorEvent do
     |> unique_constraint(:name)
   end
 
+  def by_name(query) do
+    from m in query, order_by: m.name
+  end
+
   def enabled(query) do
     from m in query, where: m.enabled == true
   end

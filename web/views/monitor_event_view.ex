@@ -1,7 +1,11 @@
 defmodule Aspirin.MonitorEventView do
   use Aspirin.Web, :view
 
-  def monitor_event_identity_class(event) do
-    String.replace("#{event.type}-#{event.addr}-#{event.port}", ".", "_")
+  def css_identity(%{type: type, addr: addr, port: port} = _event) do
+    css_identity(type, addr, port)
+  end
+
+  def css_identity(type, addr, port) do
+    String.replace("#{type}-#{addr}-#{port}", ".", "_")
   end
 end

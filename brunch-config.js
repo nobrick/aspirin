@@ -76,7 +76,7 @@ exports.config = {
     enabled: true,
     // Whitelist the npm deps to be pulled in as front-end assets.
     // All other deps in package.json will be excluded from the bundle.
-    whitelist: ["phoenix", "phoenix_html", "jquery", "bootstrap-sass"],
+    whitelist: ["phoenix", "phoenix_html", "jquery", "bootstrap-sass", "moment"],
     globals: {
       $: 'jquery',
       jQuery: 'jquery'
