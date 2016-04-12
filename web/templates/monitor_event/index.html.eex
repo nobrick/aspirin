@@ -1,35 +1,39 @@
-<h2>Monitor</h2>
+<div class="monitor-index-page">
+  <div id="monitor-state">
+    <h2 class="text-muted">Not Monitoring</h2>
+  </div>
 
-<table class="table table-condensed">
-  <thead>
-    <tr>
-      <th>Address</th>
-      <th>Port</th>
-      <th>Name</th>
-      <th>Type</th>
-      <th>State</th>
-      <th>Updated</th>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>Port</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>State</th>
+        <th>Updated</th>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for monitor_event <- @monitor_events do %>
-    <tr id="<%= css_identity(monitor_event) %>">
-      <td><%= monitor_event.addr %></td>
-      <td><%= monitor_event.port %></td>
-      <td><%= monitor_event.name %></td>
-      <td><%= monitor_event.type %></td>
-      <td class="event-state">------</td>
-      <td class="state-updated-at">------</td>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for monitor_event <- @monitor_events do %>
+        <tr id="<%= css_identity(monitor_event) %>">
+          <td><%= monitor_event.addr %></td>
+          <td><%= monitor_event.port %></td>
+          <td><%= monitor_event.name %></td>
+          <td><%= monitor_event.type %></td>
+          <td class="event-state">------</td>
+          <td class="state-updated-at">------</td>
 
-      <td class="text-right">
-        <%= link "Edit", to: monitor_event_path(@conn, :edit, monitor_event), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: monitor_event_path(@conn, :delete, monitor_event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-default btn-xs" %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
+          <td class="text-right">
+            <%= link "Edit", to: monitor_event_path(@conn, :edit, monitor_event), class: "btn btn-default btn-xs" %>
+            <%= link "Delete", to: monitor_event_path(@conn, :delete, monitor_event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-default btn-xs" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link "New monitor event", to: monitor_event_path(@conn, :new) %>
+  <%= link "New monitor event", to: monitor_event_path(@conn, :new) %>
+</div>

@@ -56,9 +56,26 @@ socket.connect()
 
 // Now that you are connected, you can join channels with a topic:
 let channel = socket.channel("status:all", {})
+let monitorState = $('#monitor-state')
 channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
+  .receive("ok", resp => {
+    console.log("Joined", resp)
+    if(monitorState.length) {
+      monitorState.html('<h2 class="text-success">Monitoring</h2>')
+    }
+  })
+  .receive("error", resp => {
+    console.log("Unable to join", resp)
+    if(monitorState.length) {
+      monitorState.html('<h2 class="text-danger">Connection Failed</h2>')
+    }
+  })
+  .receive("timeout", resp => {
+    console.log("Unable to join due to timeout", resp)
+    if(monitorState.length) {
+      monitorState.html('<h2 class="text-danger">Connection Timeout</h2>')
+    }
+  })
 
 channel.on("test_port", payload => {
   console.log(payload)
@@ -80,7 +97,13 @@ channel.on("test_port", payload => {
   eventStateUpdatedAt.text(moment(payload.timestamp).fromNow())
 })
 
-$(document).ready(() => {
+socket.onError(() => {
+    if(monitorState.length) {
+      monitorState.html('<h2 class="text-danger">Connection Error</h2>')
+    }
+})
+
+$(".monitor-index-page").ready(() => {
   setInterval(() => {
     $('.state-updated-at').each((_index, elem) => {
       $(elem).text(moment($(elem).data('time')).fromNow())
