@@ -25,7 +25,7 @@
 
       <td class="text-right">
         <%= link "Edit", to: monitor_event_path(@conn, :edit, monitor_event), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: monitor_event_path(@conn, :delete, monitor_event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "Delete", to: monitor_event_path(@conn, :delete, monitor_event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-default btn-xs" %>
       </td>
     </tr>
 <% end %>

@@ -66,12 +66,12 @@ channel.on("test_port", payload => {
   let eventState = row.find('.event-state')
   let eventStateUpdatedAt = row.find('.state-updated-at')
   if(payload.body == 'success') {
-    eventState.text('SUCCESS')
+    eventState.html('<span class="label label-success">ACTIVE</span>')
     eventState.removeClass('text-danger')
     eventState.addClass('text-success')
     row.removeClass('danger')
   } else {
-    eventState.text('FAILURE: ' + payload.reason)
+    eventState.html('<span class="label label-danger">INACTIVE</span><span class="label label-danger">' + payload.reason + "</span>")
     eventState.removeClass('text-success')
     eventState.addClass('text-danger')
     row.addClass('danger')
