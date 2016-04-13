@@ -67,7 +67,6 @@ exports.config = {
   modules: {
     autoRequire: {
       "js/app.js": [
-        "bootstrap-sass",
         "web/static/js/app"
       ]
     }
@@ -75,9 +74,6 @@ exports.config = {
 
   npm: {
     enabled: true,
-    // Whitelist the npm deps to be pulled in as front-end assets.
-    // All other deps in package.json will be excluded from the bundle.
-    whitelist: ["phoenix", "phoenix_html", "jquery", "bootstrap-sass", "moment", "react", "react-dom", "material-ui"],
     globals: {
       $: 'jquery',
       jQuery: 'jquery'

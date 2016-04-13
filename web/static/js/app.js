@@ -19,16 +19,17 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 import socket from "./socket"
+import bootstrap from "bootstrap"
 
 import React from 'react'
+import RaisedButton from 'material-ui/lib/raised-button'
 import { render } from 'react-dom'
-class HelloWorld extends React.Component {
-  render() {
-    return (<p>react</p>)
-  }
-}
+
+const MyAwesomeReactComponent = () => (
+  <RaisedButton label="Default" />
+)
 
 render(
-  <HelloWorld/>,
+  <MyAwesomeReactComponent />,
   document.getElementById("example")
 )
