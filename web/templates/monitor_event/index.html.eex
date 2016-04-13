@@ -38,4 +38,5 @@
   <%= link "New monitor event", to: monitor_event_path(@conn, :new) %>
 
   <audio id="alert-audio" src="/media/alert.mp3" type="audio/mp3"></audio>
+  <div id="example"></div>
 </div>
