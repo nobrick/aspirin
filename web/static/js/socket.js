@@ -92,6 +92,7 @@ channel.on("test_port", payload => {
     eventState.removeClass('text-success')
     eventState.addClass('text-danger')
     row.addClass('danger')
+    $("#alert-audio")[0].play()
   }
   eventStateUpdatedAt.data('time', payload.timestamp)
   eventStateUpdatedAt.text(moment(payload.timestamp).fromNow())
