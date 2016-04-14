@@ -18,18 +18,6 @@ import "phoenix_html"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
-import socket from "./socket"
 import bootstrap from "bootstrap"
-
-import React from 'react'
-import RaisedButton from 'material-ui/lib/raised-button'
-import { render } from 'react-dom'
-
-const MyAwesomeReactComponent = () => (
-  <RaisedButton label="Default" />
-)
-
-render(
-  <MyAwesomeReactComponent />,
-  document.getElementById("example")
-)
+import socket from "./socket"
+import "./monitor_event/index"

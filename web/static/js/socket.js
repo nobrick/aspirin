@@ -5,6 +5,7 @@
 // and connect at the socket path in "lib/my_app/endpoint.ex":
 import {Socket} from "phoenix"
 import moment from "moment"
+import {callbacks as monitorEventCallbacks} from "./monitor_event/index"
 
 let socket = new Socket("/socket", {params: {token: window.userToken}})
 
@@ -79,37 +80,13 @@ channel.join()
 
 channel.on("test_port", payload => {
   console.log(payload)
-  let row = $('tr#' + payload.identity)
-  let eventState = row.find('.event-state')
-  let eventStateUpdatedAt = row.find('.state-updated-at')
-  if(payload.body == 'success') {
-    eventState.html('<span class="label label-success">ACTIVE</span>')
-    eventState.removeClass('text-danger')
-    eventState.addClass('text-success')
-    row.removeClass('danger')
-  } else {
-    eventState.html('<span class="label label-danger">INACTIVE</span><span class="label label-danger">' + payload.reason + "</span>")
-    eventState.removeClass('text-success')
-    eventState.addClass('text-danger')
-    row.addClass('danger')
-    $("#alert-audio")[0].play()
-  }
-  eventStateUpdatedAt.data('time', payload.timestamp)
-  eventStateUpdatedAt.text(moment(payload.timestamp).fromNow())
+  monitorEventCallbacks.onTestPortUpdate(payload)
 })
 
 socket.onError(() => {
     if(monitorState.length) {
       monitorState.html('<h2 class="text-danger">Connection Error</h2>')
     }
-})
-
-$(".monitor-index-page").ready(() => {
-  setInterval(() => {
-    $('.state-updated-at').each((_index, elem) => {
-      $(elem).text(moment($(elem).data('time')).fromNow())
-    })
-  }, 1000)
 })
 
 export default socket
