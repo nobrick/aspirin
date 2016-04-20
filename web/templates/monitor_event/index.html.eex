@@ -12,6 +12,7 @@
         <th>Type</th>
         <th>State</th>
         <th>Updated</th>
+        <th>Last OK</th>
 
         <th></th>
       </tr>
@@ -25,6 +26,7 @@
           <td><%= monitor_event.type %></td>
           <td class="event-state">------</td>
           <td class="state-updated-at">------</td>
+          <td class="last-ok-time">------</td>
 
           <td class="text-right">
             <%= link "Edit", to: monitor_event_path(@conn, :edit, monitor_event), class: "btn btn-default btn-xs" %>

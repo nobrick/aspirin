@@ -36,6 +36,7 @@ const onTestPortUpdate = payload => {
   let row = $('tr#' + payload.identity)
   let eventState = row.find('.event-state')
   let eventStateUpdatedAt = row.find('.state-updated-at')
+  let lastOkTime = row.find('.last-ok-time')
   if(payload.body == 'success') {
     eventState.html('<span class="label label-success">ACTIVE</span>')
     eventState.removeClass('text-danger')
@@ -50,5 +51,6 @@ const onTestPortUpdate = payload => {
   }
   eventStateUpdatedAt.data('time', payload.timestamp)
   eventStateUpdatedAt.text(moment(payload.timestamp).fromNow())
+  lastOkTime.text(moment(payload.last_ok_time).format("YY-MM-DD HH:mm:ss"))
 }
 export const callbacks = {onTestPortUpdate: onTestPortUpdate}

@@ -16,7 +16,7 @@ defmodule Aspirin.Router do
   scope "/", Aspirin do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", MonitorEventController, :index
     resources "/events", MonitorEventController, except: [:show]
   end
 
