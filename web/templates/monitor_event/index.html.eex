@@ -10,9 +10,10 @@
         <th>Port</th>
         <th>Name</th>
         <th>Type</th>
+        <th>Enabled</th>
         <th>State</th>
-        <th>Updated</th>
-        <th>Last OK</th>
+        <th>Last Working</th>
+        <th>State Updated</th>
 
         <th></th>
       </tr>
@@ -24,11 +25,13 @@
           <td><%= monitor_event.port %></td>
           <td><%= monitor_event.name %></td>
           <td><%= monitor_event.type %></td>
+          <td><%= monitor_event.enabled %></td>
           <td class="event-state">------</td>
-          <td class="state-updated-at">------</td>
           <td class="last-ok-time">------</td>
+          <td class="state-updated-at">------</td>
 
           <td class="text-right">
+            <div class="monitor-enable-switch"></div>
             <%= link "Edit", to: monitor_event_path(@conn, :edit, monitor_event), class: "btn btn-default btn-xs" %>
             <%= link "Delete", to: monitor_event_path(@conn, :delete, monitor_event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-default btn-xs" %>
           </td>
@@ -40,8 +43,4 @@
   <%= link "New monitor event", to: monitor_event_path(@conn, :new) %>
 
   <audio id="alert-audio" src="/media/alert.mp3" type="audio/mp3"></audio>
-
-  <div class="panel">
-    <div id="audio-switch"></div>
-  </div>
 </div>

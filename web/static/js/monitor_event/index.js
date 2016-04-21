@@ -1,20 +1,4 @@
-import React from 'react'
-import Toggle from 'material-ui/lib/toggle'
-import { render } from 'react-dom'
 import moment from "moment"
-
-const styles = {
-  toggle: {
-    maxWidth: 150
-  }
-}
-
-const AudioSwitch = () => (
-  <Toggle label="Play Audio"
-    defaultToggled={true}
-    style={styles.toggle}
-  />
-)
 
 $("#monitor-index-page").ready(() => {
   setInterval(() => {
@@ -23,11 +7,6 @@ $("#monitor-index-page").ready(() => {
     })
   }, 1000)
 })
-
-render(
-  <AudioSwitch />,
-  document.getElementById("audio-switch")
-)
 
 const onTestPortUpdate = payload => {
   if($("#monitor-index-page").length == 0) {
