@@ -53,14 +53,6 @@ exports.config = {
       presets: ["es2015"],
       // Do not use ES6 compiler in vendor code
       ignore: [/web\/static\/vendor/]
-    },
-    sass: {
-      options: {
-        // Tell sass-brunch where to look for files to @import
-        includePaths: ["node_modules/bootstrap-sass/assets/stylesheets"]
-      },
-      // Minimum precision required by bootstrap-sass
-      precision: 8
     }
   },
 
@@ -74,6 +66,7 @@ exports.config = {
 
   npm: {
     enabled: true,
+    styles: {bootstrap: ['dist/css/bootstrap.min.css']},
     globals: {
       $: 'jquery',
       jQuery: 'jquery'
