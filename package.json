@@ -14,5 +14,8 @@
     "phoenix_html": "file:../../deps/phoenix_html",
     "sass-brunch": "~2.6.2",
     "uglify-js-brunch": "~1.7.0"
+  },
+  "scripts": {
+    "postinstall": "cp -r node_modules/font-awesome/fonts/* priv/static/fonts"
   }
 }
