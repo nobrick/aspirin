@@ -32,8 +32,12 @@
 
           <td class="text-right">
             <div class="monitor-enable-switch"></div>
-            <%= link "Edit", to: monitor_event_path(@conn, :edit, monitor_event), class: "btn btn-default btn-xs" %>
-            <%= link "Delete", to: monitor_event_path(@conn, :delete, monitor_event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-default btn-xs" %>
+            <%= link to: monitor_event_path(@conn, :edit, monitor_event), class: "btn btn-default btn-xs" do %>
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            <%= end %>
+            <%= link to: monitor_event_path(@conn, :delete, monitor_event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-default btn-xs" do %>
+              <i class="fa fa-trash-o" aria-hidden="true"></i>
+            <%= end %>
           </td>
         </tr>
       <% end %>
@@ -41,7 +45,6 @@
   </table>
 
   <%= link "New monitor event", to: monitor_event_path(@conn, :new) %>
-  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 
   <audio id="alert-audio" src="/media/alert.mp3" type="audio/mp3"></audio>
 </div>
