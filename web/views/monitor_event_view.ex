@@ -8,4 +8,12 @@ defmodule Aspirin.MonitorEventView do
   def css_identity(type, addr, port) do
     String.replace("#{type}-#{addr}-#{port}", ".", "_")
   end
+
+  def switch_id(event) do
+    "enabled-switch-#{event.id}"
+  end
+
+  def switch_checked_flag(event) do
+    if event.enabled, do: "checked", else: ""
+  end
 end

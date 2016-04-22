@@ -19,5 +19,6 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 import bootstrap from "bootstrap"
+import "material-design-lite"
 import socket from "./socket"
 import "./monitor_event/index"

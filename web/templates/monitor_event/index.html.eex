@@ -19,23 +19,30 @@
       </tr>
     </thead>
     <tbody>
-      <%= for monitor_event <- @monitor_events do %>
-        <tr id="<%= css_identity(monitor_event) %>">
-          <td><%= monitor_event.addr %></td>
-          <td><%= monitor_event.port %></td>
-          <td><%= monitor_event.name %></td>
-          <td><%= monitor_event.type %></td>
+      <%= for event <- @monitor_events do %>
+        <tr id="<%= css_identity(event) %>">
+          <td><%= event.addr %></td>
+          <td><%= event.port %></td>
+          <td><%= event.name %></td>
+          <td><%= event.type %></td>
           <td class="event-state">------</td>
           <td class="last-ok-time">------</td>
           <td class="state-updated-at">------</td>
-          <td><%= monitor_event.enabled %></td>
+          <td>
+            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="<%= switch_id event %>">
+              <input type="checkbox"
+                id="<%= switch_id event %>"
+                class="mdl-switch__input enabled-switch"
+                <%= switch_checked_flag event %>>
+              <span class="mdl-switch__label"></span>
+            </label>
+          </td>
 
           <td class="text-right">
-            <div class="monitor-enable-switch"></div>
-            <%= link to: monitor_event_path(@conn, :edit, monitor_event), class: "btn btn-default btn-xs" do %>
+            <%= link to: monitor_event_path(@conn, :edit, event), class: "btn btn-default btn-xs" do %>
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
             <%= end %>
-            <%= link to: monitor_event_path(@conn, :delete, monitor_event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-default btn-xs" do %>
+            <%= link to: monitor_event_path(@conn, :delete, event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-default btn-xs" do %>
               <i class="fa fa-trash-o" aria-hidden="true"></i>
             <%= end %>
           </td>

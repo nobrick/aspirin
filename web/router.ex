@@ -18,6 +18,7 @@ defmodule Aspirin.Router do
 
     get "/", MonitorEventController, :index
     resources "/events", MonitorEventController, except: [:show]
+    resources "/events/enable", MonitorEvent.EnabledStateController, only: [:create, :delete]
   end
 
   # Other scopes may use custom stacks.

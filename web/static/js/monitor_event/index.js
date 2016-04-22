@@ -6,6 +6,7 @@ $("#monitor-index-page").ready(() => {
       $(elem).text(moment($(elem).data('time')).fromNow())
     })
   }, 1000)
+  //TODO: $('input#enabled-switch').on ... push
 })
 
 const onTestPortUpdate = payload => {

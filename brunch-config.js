@@ -68,7 +68,8 @@ exports.config = {
     enabled: true,
     styles: {
       'bootstrap': ['dist/css/bootstrap.min.css'],
-      'font-awesome': ['css/font-awesome.min.css']
+      'font-awesome': ['css/font-awesome.min.css'],
+      'material-design-lite': ['material.min.css']
     },
     globals: {
       $: 'jquery',
