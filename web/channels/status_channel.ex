@@ -1,6 +1,8 @@
 defmodule Aspirin.StatusChannel do
   use Phoenix.Channel
   import Aspirin.MonitorManager, only: [sync_repo: 1]
+  alias Aspirin.Repo
+  alias Aspirin.MonitorEvent
 
   def join("status:all", _msg, socket) do
     {:ok, socket}

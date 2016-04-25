@@ -33,6 +33,7 @@
               <input type="checkbox"
                 id="<%= switch_id event %>"
                 class="mdl-switch__input enabled-switch"
+                data-id="<%= event.id %>"
                 <%= switch_checked_flag event %>>
               <span class="mdl-switch__label"></span>
             </label>
@@ -54,4 +55,8 @@
   <%= link "New monitor event", to: monitor_event_path(@conn, :new) %>
 
   <audio id="alert-audio" src="/media/alert.mp3" type="audio/mp3"></audio>
+</div>
+<div id="snackbar" class="mdl-js-snackbar mdl-snackbar">
+  <div class="mdl-snackbar__text"></div>
+  <button class="mdl-snackbar__action" type="button"></button>
 </div>

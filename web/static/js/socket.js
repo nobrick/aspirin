@@ -5,7 +5,7 @@
 // and connect at the socket path in "lib/my_app/endpoint.ex":
 import {Socket} from "phoenix"
 import moment from "moment"
-import {callbacks as monitorEventCallbacks} from "./monitor_event/index"
+import {callbacks as monitorEvent} from "./monitor_event/index"
 
 let socket = new Socket("/socket", {params: {token: window.userToken}})
 
@@ -61,18 +61,21 @@ let monitorState = $('#monitor-state')
 channel.join()
   .receive("ok", resp => {
     console.log("Joined", resp)
+    monitorEvent.setChannel(channel)
     if(monitorState.length) {
       monitorState.html('<h2 class="text-success">Monitoring</h2>')
     }
   })
   .receive("error", resp => {
     console.log("Unable to join", resp)
+    monitorEvent.setChannel(false)
     if(monitorState.length) {
       monitorState.html('<h2 class="text-danger">Connection Failed</h2>')
     }
   })
   .receive("timeout", resp => {
     console.log("Unable to join due to timeout", resp)
+    monitorEvent.setChannel(false)
     if(monitorState.length) {
       monitorState.html('<h2 class="text-danger">Connection Timeout</h2>')
     }
@@ -80,13 +83,20 @@ channel.join()
 
 channel.on("test_port", payload => {
   console.log(payload)
-  monitorEventCallbacks.onTestPortUpdate(payload)
+  monitorEvent.onTestPortUpdate(payload)
+})
+
+channel.on("switch:enabled", payload => {
+  console.log(payload)
+  monitorEvent.onEnabledStateUpdate(payload)
 })
 
 socket.onError(() => {
     if(monitorState.length) {
       monitorState.html('<h2 class="text-danger">Connection Error</h2>')
+      $("#alert-audio")[0].play()
     }
+    monitorEvent.setChannel(false)
 })
 
 export default socket
